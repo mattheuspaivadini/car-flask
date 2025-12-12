@@ -4,27 +4,45 @@ from flask import Flask, render_template, request, redirect, url_for, session, f
 app = Flask(__name__)
 
 # Chave secreta para sessões (em produção, use uma chave mais segura)
-app.secret_key = 'sua_chave_secreta_aqui'
+app.secret_key = 'banana1234'
 
 # Configuração dos produtos (simulando um banco de dados)
 app.config['PRODUTOS'] = {
     1: {
         'id': 1, 
-        'nome': 'Produto 1', 
-        'preco': 10.00, 
-        'imagem_url': 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Product_sample_icon_picture.png/640px-Product_sample_icon_picture.png'
+        'nome': 'Desodorante', 
+        'preco': 23.00, 
+        'imagem_url': 'https://pngimg.com/d/deodorant_PNG54.png'
     },
     2: {
         'id': 2, 
-        'nome': 'Produto 2', 
-        'preco': 20.00, 
-        'imagem_url': 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Product_sample_icon_picture.png/640px-Product_sample_icon_picture.png'
+        'nome': 'Ouroboros', 
+        'preco': 5000000000.00, 
+        'imagem_url': 'https://i.pinimg.com/originals/10/68/b2/1068b2cb7bfbc883fd3e211af6e1bf7e.png'
     },
     3: {
         'id': 3, 
-        'nome': 'Produto 3', 
-        'preco': 30.00, 
-        'imagem_url': 'https://upload.wikimedia.org/wikipedia/commons/thumb/1/14/Product_sample_icon_picture.png/640px-Product_sample_icon_picture.png'
+        'nome': 'Persona 3 Reload', 
+        'preco': 350.00, 
+        'imagem_url': 'https://cdn.mobygames.com/covers/18191503-persona-3-reload-windows-apps-front-cover.jpg'
+    },
+    4: {
+        'id': 4, 
+        'nome': 'Gameboy Original', 
+        'preco': 780.00, 
+        'imagem_url': 'https://images.launchbox-app.com/Platforms/6df33ae4-8087-4db1-9f7b-965ddcba11de.png'
+    },
+    5: {
+        'id': 5, 
+        'nome': 'Máquina para secar roupa via raios ultravioletas', 
+        'preco': 990.00, 
+        'imagem_url': 'https://www.decorfacil.com/wp-content/uploads/2022/03/20220321tipos-de-varal-4-750x499.jpg'
+    },
+    6: {
+        'id': 6, 
+        'nome': 'Átomo de água', 
+        'preco': 0.01, 
+        'imagem_url': 'https://cdn.pixabay.com/photo/2013/07/12/18/15/atom-nucleus-153152_960_720.png'
     },
 }
 
@@ -78,6 +96,13 @@ def remover_do_carrinho(produto_id):
     else:
         flash('Produto não encontrado no carrinho.')
     
+    return redirect(url_for('carrinho'))
+
+# Rota para limpar o carrinho
+@app.route('/limpar_carrinho', methods=['POST'])
+def limpar_carro():
+    session['carrinho'] = []
+    flash('O carrinho foi limpado com sucesso!')
     return redirect(url_for('carrinho'))
 
 # Executar aplicação

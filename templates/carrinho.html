@@ -36,6 +36,13 @@
     <!-- Total do carrinho -->
     <h3 class="text-xl font-semibold mt-6">Total: R$ {{ "%.2f"|format(total) }}</h3>
     
+    <!-- Botão para limpar o carrinho -->
+    <form action="{{ url_for('limpar_carro') }}" method="post" class="mt-4">
+        <button type="submit" class="bg-red-600 hover:bg-red-700 text-white px-4 py-2 rounded transition">
+            Limpar Carrinho
+        </button>
+    </form>
+    
 {% else %}
     <!-- Carrinho vazio -->
     <p class="text-gray-600">Seu carrinho está vazio.</p>
